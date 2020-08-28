@@ -1,0 +1,59 @@
+class Solution(object):
+    
+    def binary_search(sef,arr,target):
+    
+        s = 0
+
+        e = len(arr) -1 
+
+        while(s < e):
+
+            mid = int(s +(e-s)/2)
+
+
+            if arr[mid] < target:
+
+                s = mid + 1
+            else:
+
+                e = mid
+
+
+
+        return arr[s]
+
+    def findRightInterval(self, arr):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[int]
+        """
+        
+        output = [-1]*len(arr)
+
+        sorted_list = []
+
+        store = {}
+
+        for i in range(len(arr)):
+
+            sorted_list.append(arr[i][0])
+
+            store[arr[i][0]] = i
+
+
+        sorted_list.sort()
+
+
+        for i in range(len(arr)):
+
+
+            output[i] = self.binary_search(sorted_list, arr[i][1])
+
+            if output[i] < arr[i][1]:
+
+                output[i] = -1
+
+            else:
+
+                output[i] = store.get(output[i])
+        return output
