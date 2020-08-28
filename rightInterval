@@ -1,0 +1,40 @@
+class Solution(object):
+    def findRightInterval(self, intervals):
+        """
+        :type intervals: List[List[int]]
+        :rtype: List[int]
+        """
+        
+        l=[-1]*len(intervals)
+        
+        M=[]
+        
+        ans ={}
+        
+        for i,list1 in enumerate(intervals):
+            
+            Min=10000
+            
+            for j,list2 in enumerate(intervals):
+                
+                if list1[1] in ans:
+                    
+                    l[i] = ans.get(list1[1])
+                    
+                    break
+                    
+                else:
+                
+                    if(list1[1]<=list2[0] and list1!=list2 and list2[0]<Min):
+                        
+                        Min=list2[0]
+
+                        l[i]=j
+
+                        if(j == (len(intervals) - 1)):
+
+                            ans[Min] = j
+                    
+                    
+    
+        return(l)
